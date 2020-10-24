@@ -6,4 +6,6 @@ function autocomplete {
     prev="${COMP_WORDS[@]::$(( ${#COMP_WORDS[@]} - 0 ))}"
     COMPREPLY=($(compgen -W "$(SNOW_AUTOCOMPLETE=1 $prev)" -- "${cur}"))
 }
-complete -F autocomplete snow
+if [[ $SHELL = "/bin/bash" ]]; then
+    complete -F autocomplete snow
+fi
