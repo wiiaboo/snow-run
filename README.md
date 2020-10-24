@@ -12,7 +12,8 @@ It is free, experimental, assumed to work with the London release, although it m
 Version 0.0.1
 
 Requirements:
- - curl, bash, grep, sed, etc. (=> Linux / Windows Subsystem for Linux / Cygwin / MSYS / …)
+ - curl, bash/zsh, etc. (=> Linux / Windows Subsystem for Linux / Cygwin / MSYS / …)
+ - GNU sed and grep (if on macOS, add the GNU variants to PATH, the built-in ones are insufficient and slower)
  - a running ServiceNow instance
  - an account in ServiceNow that is capable of running background scripts
 
