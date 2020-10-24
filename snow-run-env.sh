@@ -13,6 +13,10 @@ then
 fi
 export snow_instance
 
+if [[ -f $HOME/.netrc ]] && grep -q "$snow_instance" < $HOME/.netrc; then
+    snow_user=$(grep -A2 "machine ${snow_instance}" < $HOME/.netrc | sed -nE 's;login (.+);\1;gp')
+    snow_pwd=$(grep -A2 "machine $snow_instance" < $HOME/.netrc | sed -nE 's;password (.+);\1;gp')
+fi
 
 
 echo -n "User [$snow_user]: "
