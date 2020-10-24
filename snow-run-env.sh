@@ -2,6 +2,11 @@ my_dir="$( cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")"; pwd -P )"
 export PATH=$PATH:$my_dir/bin
 
 source $my_dir/include/autocomplete.sh
+if [[ -f .snow_run ]]; then
+    source .snow_run
+elif [[ -f ../.snow_run ]]; then
+    source ../.snow_run
+fi
 
 
 echo "ServiceNow instance(e.g. dev1234.service-now.com) [$snow_instance]:"
