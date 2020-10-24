@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ENABLE_AUTOCOMPLETE=1
-display_usage() { 
-	echo "Search for records via REST API" 
+display_usage() {
+	echo "Search for records via REST API"
 	echo -e "\nUsage:\nsnow r search [options] TABLE_NAME\n"
     echo -e "Options:\n-q|--query ENCODED_QUERY\n-o|--order-by FIELD\n-od|--order-by-desc FIELD\n-f|--fields FIELDS\n-l|--limit NUMBER\n--no-header\n--sys-id\tEquivalent to --no-header -f sys_id"
     echo Fields are returned in arbitrary order
@@ -10,7 +10,7 @@ display_usage() {
     echo -e "Advanced example:\n snow r search -f name,description -q nameLIKEcmdb -l 10 sys_script_include -o name -od sys_created_on"
 
     exit 1
-} 
+}
 
 
 source $(snow -I)/env.sh

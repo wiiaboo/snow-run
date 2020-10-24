@@ -27,7 +27,7 @@ fi;
 function split_std_and_error {
    DONE=false
    WRITE_TO=
-   
+
    until $DONE
    do
       read str || DONE=true
@@ -41,10 +41,10 @@ function split_std_and_error {
       then
          if [[ $WRITE_TO == "stdout" ]]
          then
-            echo "$str" | decode_html
+            printf '%s\n' "$str" | decode_html
          elif [[ $WRITE_TO == "stderr" ]]
          then
-            echo "$str" | decode_html >&2
+            printf '%s\n' "$str" | decode_html >&2
          fi
       fi
    done
