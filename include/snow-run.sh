@@ -59,6 +59,6 @@ curl https://$snow_instance/sys.scripts.do -H 'Connection: keep-alive' -H 'Pragm
  | tee $SNOW_TMP_DIR/last_run_output.txt \
  | mark_script_output \
  | tee $SNOW_TMP_DIR/last_parsed_output.txt \
- | head -n -1 | split_std_and_error
+ | sed '$d' | split_std_and_error
 # exit with the first command's (curl)  exit code
 exit ${PIPESTATUS[0]}
