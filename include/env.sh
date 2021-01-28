@@ -12,9 +12,9 @@ function ensure_instance_set() {
 }
 
 function check_arguments() {
-    # if less than $1 arguments supplied, display usage 
+    # if less than $1 arguments supplied, display usage
     if [[  $x -lt $1 ]]
-    then 
+    then
         display_usage
         exit 1
     fi
@@ -26,12 +26,20 @@ function extract_sysparm_ck() {
     grep -oP 'sysparm_ck[^>]*value="\K\w+'
 }
 
+function extract_current_scope_sysid() {
+    grep -oP 'name="sys_scope".*?<option selected value="\K\w+'
+}
+
+function extract_current_scope_name() {
+    grep -oP 'name="sys_scope".*?<option selected value="\w+">\K\w+'
+}
+
 function get_login_token() {
     curl https://$snow_instance/login.do --cookie-jar $SNOW_COOKIE_FILE -sS | extract_sysparm_ck
 }
 
 function tabularize {
-    # Takes the input and splits it by tabulators into columns. 
+    # Takes the input and splits it by tabulators into columns.
     # To prevent table from wrapping to the next line, everything longer than the current terminal size is ignored.
 
     max_len=$(( $(tput cols) - 1 ))
@@ -41,11 +49,11 @@ function tabularize {
 
 function join_by {
      # Join array using a delimiter
-     # Example: 
+     # Example:
      # arr = (hello world)
      # join_by , ${arr[@]} => "hello,world"
 
-     local IFS="$1"; shift; echo "$*"; 
+     local IFS="$1"; shift; echo "$*";
      }
 
 function decode_html {
@@ -57,7 +65,7 @@ function urlencode {
     # urlencode <string>
     old_lc_collate=$LC_COLLATE
     LC_COLLATE=C
-    
+
     local length="${#1}"
     for (( i = 0; i < length; i++ )); do
         local c="${1:i:1}"
@@ -66,7 +74,7 @@ function urlencode {
             *) printf '%%%02X' "'$c" ;;
         esac
     done
-    
+
     LC_COLLATE=$old_lc_collate
 }
 
@@ -94,7 +102,7 @@ function enable_autocomplete {
         then
             shift
             # Lazy - evaluate command
-            # set SNOW_AUTOCOMPLETE to nothing 
+            # set SNOW_AUTOCOMPLETE to nothing
             export SNOW_AUTOCOMPLETE=
             $@
             exit 1;
